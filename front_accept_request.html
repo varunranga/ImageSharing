@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+	Receive ID:<input type="text" name="receive_id" id="receive_id"><br>
+	Send ID:<input type="text" name="send_id" id="send_id"><br>
+	<button onclick="changePage_acceptRequest();">Submit</button>
+	<script type="text/javascript">
+		function changePage_acceptRequest()
+		{
+			send_id = document.getElementById('send_id')
+			receive_id = document.getElementById('receive_id')
+			window.location.assign("back_accept_request.php?receive_id="+receive_id.value+"&send_id="+send_id.value)
+		}
+	</script>
+</body>
+</html>
