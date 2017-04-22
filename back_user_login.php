@@ -3,14 +3,11 @@
 	$email_id = $_POST['login_email_id'];
 	$password = hash('ripemd128', $_POST['login_password']);
 
-	$cmd = "mongo --eval \"var email_id='$email_id'; var password='$password'\" db_user_login.js";
+	$cmd = "sudo mongo --eval \"var email_id='$email_id'; var password='$password'\" db_user_login.js";
 
 	echo $cmd;
 
 	exec($cmd, $output, $status);
-
-	echo "<br>";
-	print_r ($output);
 
 	$json = mongoOutputToJSON($output, $status);
 
@@ -38,6 +35,8 @@
 		}		
 		else
 		{
+			echo "$line<br>";
+			
 			$i = 0;
 			$jsonReached = 0; 
 			foreach($output as $line)
