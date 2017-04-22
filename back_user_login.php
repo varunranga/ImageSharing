@@ -37,11 +37,11 @@
 			$jsonReached = 0; 
 			foreach($output as $line)
 			{
-				if ($line == "{")
+				if ($line[0] == "{")
 					$i = 1;
 
 				if ($i == 1)
-					$json .= $line;
+					$new_json .= $line;
 			}
 		}
 
