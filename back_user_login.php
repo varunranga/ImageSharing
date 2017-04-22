@@ -10,7 +10,7 @@
 	exec($cmd, $output, $status);
 
 	echo "<br>";
-	echo $output;
+	print_r ($output);
 
 	$json = mongoOutputToJSON($output, $status);
 
