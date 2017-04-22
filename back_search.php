@@ -4,14 +4,19 @@
 
 	$arr = explode(' ', $search);
 
-	$first_name = $arr[0];
-	
+	if (isset($arr[0])
+		$first_name = $arr[0];
+	else
+		$first_name = '';
+
 	if (isset($arr[1]))
 		$last_name = $arr[1];
 	else
 		$last_name = '';
 
 	$cmd = "mongo --eval \"var first_name='$first_name'; var last_name='$last_name'\" db_search.js";
+
+	echo "$cmd";
 
 	exec($cmd, $output, $status);
 

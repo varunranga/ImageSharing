@@ -26,11 +26,19 @@
             else
             {
                 $i = 0; 
-                foreach($output as $line) 
-                    if ($i++ > 6) 
-                    {   
-                        $json .= "$line\n"; 
+                foreach($output as $line)
+                { 
+                    if ($line == "{")
+                      $i = 1;
+
+                    if ($line == "[")
+                      $i = 1;
+
+                    if ($i == 1)
+                    {
+                      $json .= "$line\n"; 
                     }
+                }
             }
 
             $json = json_decode($json);
@@ -70,11 +78,14 @@
             else
             {
                 $i = 0; 
-                foreach($output as $line) 
-                    if ($i++ > 4) 
-                    {   
-                        $json .= "$line\n"; 
-                    }
+                foreach($output as $line)
+                { 
+                    if ($line == "{")
+                      $i = 1;
+
+                    if ($i == 1)
+                      $json .= $line;
+                }
             }
 
             $json = json_decode($json);
@@ -255,7 +266,7 @@
         </div>
          <ul class="nav navbar-nav navber-center" style="width: 50%;">
               <form action="search.php" method="GET">  
-                <input type="text" placeholder="Search for people." style="margin-top: 10px; height: 30px; width: 100%;">
+                <input type="text" name="search" placeholder="Search for people." style="margin-top: 10px; height: 30px; width: 100%;">
               </form>
           </ul>
         <div class="collapse navbar-collapse" id="navbar-ex-collapse">

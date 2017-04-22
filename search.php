@@ -6,13 +6,15 @@
 
   $arr = explode(' ', $search);
 
-  $first_name = $arr[0];
-  
+  $first_name = '';
+  $last_name = '';
+
+  if (isset($arr[0]))
+    $first_name = $arr[0];  
+
   if (isset($arr[1]))
     $last_name = $arr[1];
-  else
-    $last_name = '';
-
+  
   $cmd = "mongo --eval \"var first_name='$first_name'; var last_name='$last_name'\" db_search.js";
 
   exec($cmd, $output, $status);
@@ -28,10 +30,15 @@
     {
       $i = 0; 
       foreach($output as $line) 
-        if ($i++ > 4) 
+       {
+        if ($line[0] == '[') 
         { 
-          $json .= "$line\n"; 
-        }
+            $i = 1;
+         }
+
+         if ($i == 1)
+          $json .= $line;
+      }
     }
 
     $json = json_decode($json);
@@ -212,7 +219,7 @@
         </div>
          <ul class="nav navbar-nav navber-center" style="width: 50%;">
               <form action="search.php" method="GET">  
-                <input type="text" placeholder="Search for people." style="margin-top: 10px; height: 30px; width: 100%;">
+                <input type="text" name="search" placeholder="Search for people." style="margin-top: 10px; height: 30px; width: 100%;">
               </form>
           </ul>
         <div class="collapse navbar-collapse" id="navbar-ex-collapse">
