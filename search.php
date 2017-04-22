@@ -215,7 +215,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="#"><span>PhotoSharing.com</span></a>
+          <a class="navbar-brand" href="newsfeed.php"><span>PhotoSharing.com</span></a>
         </div>
          <ul class="nav navbar-nav navber-center" style="width: 50%;">
               <form action="search.php" method="GET">  

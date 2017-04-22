@@ -291,7 +291,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="#"><span>PhotoSharing.com</span></a>
+          <a class="navbar-brand" href="newsfeed.php"><span>PhotoSharing.com</span></a>
         </div>
          <ul class="nav navbar-nav navber-center" style="width: 50%;">
               <form action="search.php" method="GET">  
@@ -335,14 +335,14 @@
 
             <form action="back_change_profile_picture.php" method="POST" enctype="multipart/form-data">
               <h2 id="name"> Change Profile Picture: </h2>
-              <input name="profile_picture" type="file" class="btn btn-primary" value="upload" onchange="previewFile()"><br>
+              <input name="fileToUpload" id="fileToUpload" type="file" class="btn btn-primary" value="Upload New Image" onchange="previewFile()"><br>
                 <img src="emptyProfilePicture.png" height="200" alt="Image preview..."><br><br>
                 <input type="submit" value="Okay">
                 <input type="reset" value="Cancel">    
             </form>
             <form action="back_insert_post.php" method="POST" enctype="multipart/form-data">
               <h2 id="name"> Upload New Image </h2>
-              <input name="post_picture" type="file" class="btn btn-primary" value="Upload New Image" onchange="previewFile()"><br>
+              <input name="fileToUpload" id="fileToUpload" type="file" class="btn btn-primary" value="Upload New Image" onchange="previewFile()"><br>
               <input type="text" name="description" value="" hidden>
               <img src="emptyProfilePicture.png" height="200" alt="Image preview..."><br><br>
               <input type="submit" value="Okay">

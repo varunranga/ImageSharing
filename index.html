@@ -113,7 +113,7 @@
   	 	<div id="section2">
       		<h2 style="font-size: 72px; font-family: 'Black Ops One', cursive; margin-top: 100px; margin-left: 200px; margin-bottom: 50px;">Sign up</h2>
        		<div class="container" style="border: 5px brown solid; border-radius: 10px; padding: 25px;">
-      			<form action="back_insert_user.php" method="POST" enctype="multipart/form_date">
+      			<form action="back_insert_user.php" method="POST" enctype="multipart/form-data">
         			<label class="col-lg-6 col-md-6 col-sm-4 col-xs-4" for="first_name" style="text-align: center;">
         				First Name
         			</label>
@@ -171,7 +171,7 @@
 		      		<label class="col-lg-6 col-md-6 col-sm-4 col-xs-4" for="profile_picture" style="text-align: center;">
 		      			Upload a profile picture
 		      		</label>
-		      		<input class="col-lg-6 col-md-6 col-sm-8 col-xs-8" type="file" name="profile_picture" />
+		      		<input type="file" name="fileToUpload" id="fileToUpload">
 		      		<br />
 		      		<br />
 		      		<br />

@@ -8,6 +8,8 @@
 
 	$user_id = "USR".($json->user_count + 1);
 
+//	print_r($_POST);
+
 	$first_name = $_POST['first_name'];
 	$last_name = $_POST['last_name'];
 	$email_id = $_POST['email_id'];
@@ -16,53 +18,59 @@
 	$state = $_POST['state'];
 	$country = $_POST['country'];
 	$password = hash('ripemd128', $_POST['password']);
-	$profile_picture = "";
 
-	if(isset($_FILES['profile_picture']))
-	{
-    	$errors = array();
-      	$file_name = $_FILES['profile_picture']['name'];
-      	$file_size = $_FILES['profile_picture']['size'];
-      	$file_tmp = $_FILES['profile_picture']['tmp_name'];
-      	$file_type = $_FILES['profile_picture']['type'];
-		$tmp = explode('.', $file_name);
-		$file_ext = end($tmp);      
-      	$expensions = array("jpeg","jpg","png");
-      
-      	if(in_array($file_ext,$expensions) === false)
-      	{
-         	$errors[]="extension not allowed, please choose a JPEG or PNG file.";
-      	}
-      
-      	if($file_size > 2097152)
-      	{
-        	$errors[]='File size must be lesser than 2 MB';
-      	}
-      
-      	if(empty($errors) == true)
-      	{
-      		$profile_picture = "/opt/lampp/htdocs/CCBD/Task 1/profile_pictures/".$user_id.".".$file_ext;
+	$target_dir = "profile_pictures/";
+	$target_file = $target_dir . basename($_FILES['fileToUpload']['name']);
+	$uploadOk = 1;
+	$imageFileType = pathinfo($target_file,PATHINFO_EXTENSION);
+	$target_file = "profile_pictures/".$user_id.".".$imageFileType;
+	// Check if image file is a actual image or fake image
+	if(isset($_POST["submit"])) {
+	    $check = getimagesize($_FILES['fileToUpload']['tmp_name']);
+	    if($check !== false) {
+	        echo "File is an image - " . $check["mime"] . ".";
+	        $uploadOk = 1;
+	    } else {
+	        echo "File is not an image.";
+	        $uploadOk = 0;
+	    }
+	}
+	// Check if file already exists
+	if (file_exists($target_file)) {
+	    echo "Sorry, file already exists.";
+	    $uploadOk = 0;
+	}
+	// Check file size
+	if ($_FILES["fileToUpload"]["size"] > 500000) {
+	    echo "Sorry, your file is too large.";
+	    $uploadOk = 0;
+	}
+	// Allow certain file formats
+	if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
+	&& $imageFileType != "gif" ) {
+	    echo "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
+	    $uploadOk = 0;
+	}
+	// Check if $uploadOk is set to 0 by an error
+	if ($uploadOk == 0) {
+	    echo "Sorry, your file was not uploaded.";
+	// if everything is ok, try to upload file
+	} else {
+	    if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
+	        echo "The file ". basename( $_FILES["fileToUpload"]["name"]). " has been uploaded.";
+	    } else {
+	        echo "Sorry, there was an error uploading your file.";
+	    }
+	}
 
-         	$status = move_uploaded_file($file_tmp,$profile_picture);
-#         	echo "Success<br>";
-      	}
-      	else
-      	{
-#  			echo "Hello, world";
- #       	print_r($errors);
-      	}
+	$profile_picture = $target_file;
 
-      	if ($status == false)
-      	{
-#      		echo "Did not work<br>";
-      	}
-   	}
 
 	$cmd = "mongo --eval \"var user_id='$user_id'; var first_name='$first_name'; var last_name='$last_name'; var email_id='$email_id'; var phone_number='$phone_number'; var city='$city'; var state='$state'; var country='$country'; var password='$password'; var profile_picture='$profile_picture'\" db_insert_user.js";
 
 	exec($cmd, $output, $status);
 
-	header('Location: index.html');
+	echo ('<br><br><a href="index.html">Click here to go back!</a>');
 
 	function mongoOutputToJSON($output, $status)
     {
