@@ -20,7 +20,7 @@
 
 		setcookie('user_id',$json->user_id);
 
-		header("Location: newsfeed.php");
+//		header("Location: newsfeed.php");
 	}
 
 	function mongoOutputToJSON($output, $status)
@@ -37,10 +37,11 @@
 			$jsonReached = 0; 
 			foreach($output as $line)
 			{
-				if ($i++ > 4) 
-				{	
-					$new_json .= "$line\n"; 
-				}
+				if ($line == "{")
+					$i = 1;
+
+				if ($i == 1)
+					$json .= $line;
 			}
 		}
 
