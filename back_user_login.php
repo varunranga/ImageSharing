@@ -5,6 +5,8 @@
 
 	$cmd = "mongo --eval \"var email_id='$email_id'; var password='$password'\" db_user_login.js";
 
+	echo $cmd;
+
 	exec($cmd, $output, $status);
 
 	$json = mongoOutputToJSON($output, $status);
