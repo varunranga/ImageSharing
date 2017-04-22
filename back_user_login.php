@@ -9,6 +9,9 @@
 
 	exec($cmd, $output, $status);
 
+	echo "<br>"
+	echo $output;
+
 	$json = mongoOutputToJSON($output, $status);
 
 	if(isset($json->problem))
