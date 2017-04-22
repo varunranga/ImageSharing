@@ -44,6 +44,8 @@
 					$new_json .= $line;
 			}
 		}
+		
+		echo $new_json;
 
 		$new_json = json_decode($new_json);
 
