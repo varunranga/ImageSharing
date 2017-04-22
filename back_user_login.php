@@ -20,7 +20,7 @@
 
 		setcookie('user_id',$json->user_id);
 
-//		header("Location: newsfeed.php");
+		header("Location: newsfeed.php");
 	}
 
 	function mongoOutputToJSON($output, $status)
