@@ -3,7 +3,7 @@
 	$email_id = $_POST['login_email_id'];
 	$password = hash('ripemd128', $_POST['login_password']);
 
-	$cmd = "sudo mongo --eval \"var email_id='$email_id'; var password='$password'\" db_user_login.js";
+	$cmd = "cd /opt/lampp/htdocs && mongo --eval \"var email_id='$email_id'; var password='$password'\" db_user_login.js";
 
 	echo $cmd;
 
