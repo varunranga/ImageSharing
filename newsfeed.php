@@ -28,10 +28,10 @@
                 $i = 0; 
                 foreach($output as $line)
                 { 
-                    if ($line == "{")
+                    if ($line[0] == "{")
                       $i = 1;
 
-                    if ($line == "[")
+                    if ($line[0] == "[")
                       $i = 1;
 
                     if ($i == 1)
@@ -80,7 +80,7 @@
                 $i = 0; 
                 foreach($output as $line)
                 { 
-                    if ($line == "{")
+                    if ($line[0] == "{")
                       $i = 1;
 
                     if ($i == 1)
