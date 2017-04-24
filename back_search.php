@@ -4,15 +4,14 @@
 
 	$arr = explode(' ', $search);
 
+	$first_name = '';
+	$last_name = '';
+	
 	if (isset($arr[0])
-		$first_name = $arr[0];
-	else
-		$first_name = '';
+		$first_name = $arr[0];	
 
 	if (isset($arr[1]))
 		$last_name = $arr[1];
-	else
-		$last_name = '';
 
 	$cmd = "mongo --eval \"var first_name='$first_name'; var last_name='$last_name'\" db_search.js";
 
@@ -31,10 +30,18 @@
 		{
 			$i = 0; 
 			foreach($output as $line) 
-				if ($i++ > 4) 
+			{	
+				if ($line[0] == "{")
+					$i = 1;
+				
+				if ($line[0] == "[")
+					$i = 1;
+				
+				if ($i == 1) 
 				{	
-					$json .= "$line\n"; 
+					$json .= "$line"; 
 				}
+			}
 		}
 
 		$json = json_decode($json);
