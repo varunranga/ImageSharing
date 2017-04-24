@@ -85,8 +85,14 @@
 			$i = 0;
 			$jsonReached = 0; 
 			foreach($output as $line)
-			{
-				if ($i++ > 4) 
+			{	
+				if ($line[0] == "{")
+					$i = 1;
+				
+				if ($line[0] == "[")
+					$i = 1;
+				
+				if ($i == 1) 
 				{	
 					$new_json .= "$line\n"; 
 				}
