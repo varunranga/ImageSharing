@@ -67,7 +67,7 @@
 
 	function mongoOutputToJSON($output, $status)
     {
-    	$json = "{\n";
+    	$json = "";
 
 		if ($status) 
 		{
@@ -76,13 +76,22 @@
 		else
 		{
 			$i = 0; 
-			foreach($output as $line) 
-				if ($i++ > 6) 
+			foreach($output as $line)
+			{	
+				if ($line[0] == "{")
+					$i = 1;
+				
+				if ($line[0] == "[")
+					$i = 1;				
+				
+				if ($i == 1) 
 				{	
-					$json .= "$line\n"; 
+					$json .= "$line"; 
 				}
+		
+			}
 		}
-
+		
 		$json = json_decode($json);
 
 		switch (json_last_error()) {
